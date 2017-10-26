@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web:
+    image: mlesniak/hello-world:v1.0.0
+    # labels:
+      # io.rancher.container.hostname_override: container_name
+  redis:
+    image: redis
+  loadbalancer:
+    image: rancher/lb-service-haproxy
+    ports:
+    - 80
