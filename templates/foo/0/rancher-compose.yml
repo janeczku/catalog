@@ -1,6 +1,15 @@
-version: '2'
-services:
-  loadbalancer:
+.catalog:
+    name: "foo"
+    version: "v0.1"
+    minimum_rancher_version: v0.51.0
+    questions:
+        - variable: scale
+          description: "Initial scale for frontend"
+          label: "Frontend Scale"
+          required: true
+          default: 1
+          type: "int"
+loadbalancer:
     start_on_create: true
     scale: 1
     lb_config:
@@ -14,7 +23,7 @@ services:
       unhealthy_threshold: 3
       healthy_threshold: 2
       response_timeout: 2000
-  web:
-    scale: 1
-  redis:
+web:
+    scale: ${scale}
+redis:
     scale: 1
